@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
+const cors = require("cors");
+const morgan = require("morgan");
 
 const databaseConnect = require("./config/database");
 const bodyParser = require("body-parser");
@@ -12,8 +14,10 @@ dotenv.config({
   path: "backend/config/config.env",
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(morgan("dev"));
 
 app.use('/api/chat',authRouter);
 

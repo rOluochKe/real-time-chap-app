@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { REGISTER_FAIL, REGISTER_SUCCESS, USER_LOGIN_SUCCESS, USER_LOGIN_FAIL } from "../types/authType";
+import { baseUrl } from '../../baseUrl';
 
 export const userRegister = (data) => {
   return async (dispatch) => {
@@ -10,7 +11,7 @@ export const userRegister = (data) => {
     }
 
     try {
-      const response = await axios.post('/api/chat/user-register', data, config);
+      const response = await axios.post(`${baseUrl}user-register`, data, config);
       localStorage.setItem('authToken', response.data.token);
 
       dispatch({
@@ -40,7 +41,7 @@ export const userLogin = (data) => {
     }
 
     try {
-      const response = await axios.post('/api/chat/user-login', data, config);
+      const response = await axios.post(`${baseUrl}user-login`, data, config);
       localStorage.setItem('authToken', response.data.token);
 
       dispath({
@@ -63,7 +64,7 @@ export const userLogin = (data) => {
 
 export const userLogout = () => async(dispatch) => {
   try{
-    const response = await axios.post('/api/chat/user-logout');
+    const response = await axios.post(`${baseUrl}user-logout`);
 
     if(response.data.success){
       localStorage.removeItem('authToken');
