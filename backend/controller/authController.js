@@ -14,7 +14,7 @@ module.exports.userRegister = (req, res) => {
     const error = [];
 
     if (!userName) {
-      error.push("Please provide your username");
+      error.push("Please provide your user name");
     }
     if (!email) {
       error.push("Please provide your Email");
@@ -57,11 +57,10 @@ module.exports.userRegister = (req, res) => {
         const checkUser = await registerModel.findOne({
           email: email,
         });
-
         if (checkUser) {
           res.status(404).json({
             error: {
-              errorMessage: ["Your email already exist"],
+              errorMessage: ["Your email already exited"],
             },
           });
         } else {

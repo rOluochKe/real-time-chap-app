@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 import App from "./App";
-
+import "./main.scss";
 import { Provider } from "react-redux";
 import store from "./store/index.js";
 
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import alertTemplate from "react-alert-template-basic";
-
-import "./main.scss";
 
 const options = {
   timeout: 5000,

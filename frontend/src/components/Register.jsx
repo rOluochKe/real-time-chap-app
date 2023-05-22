@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +7,15 @@ import { useAlert } from "react-alert";
 import { ERROR_CLEAR, SUCCESS_MESSAGE_CLEAR } from "../store/types/authType";
 
 const Register = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const alert = useAlert();
 
-  const { authenticate, error, successMessage } = useSelector(
+  const { authenticate, error, successMessage, myInfo } = useSelector(
     (state) => state.auth
   );
+  console.log(myInfo);
+
+  const dispatch = useDispatch();
 
   const [state, setstate] = useState({
     userName: "",
@@ -47,11 +50,11 @@ const Register = () => {
   };
 
   const register = (e) => {
+    const { userName, email, password, confirmPassword, image } = state;
     e.preventDefault();
 
-    const { userName, email, password, confirmPassword, image } = state;
-
     const formData = new FormData();
+
     formData.append("userName", userName);
     formData.append("email", email);
     formData.append("password", password);
@@ -65,7 +68,6 @@ const Register = () => {
     if (authenticate) {
       navigate("/");
     }
-
     if (successMessage) {
       alert.success(successMessage);
       dispatch({ type: SUCCESS_MESSAGE_CLEAR });
@@ -74,7 +76,6 @@ const Register = () => {
       error.map((err) => alert.error(err));
       dispatch({ type: ERROR_CLEAR });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [successMessage, error]);
 
   return (
@@ -90,8 +91,8 @@ const Register = () => {
               <label htmlFor="username">User Name</label>
               <input
                 type="text"
-                name="userName"
                 onChange={inputHendle}
+                name="userName"
                 value={state.userName}
                 className="form-control"
                 placeholder="User Name"
@@ -103,8 +104,8 @@ const Register = () => {
               <label htmlFor="email">Email</label>
               <input
                 type="email"
-                name="email"
                 onChange={inputHendle}
+                name="email"
                 value={state.email}
                 className="form-control"
                 placeholder="Email"
@@ -116,8 +117,8 @@ const Register = () => {
               <label htmlFor="password">Password</label>
               <input
                 type="password"
-                name="password"
                 onChange={inputHendle}
+                name="password"
                 value={state.password}
                 className="form-control"
                 placeholder="Password"
@@ -129,8 +130,8 @@ const Register = () => {
               <label htmlFor="confirmPassword">Confirm Password</label>
               <input
                 type="password"
-                name="confirmPassword"
                 onChange={inputHendle}
+                name="confirmPassword"
                 value={state.confirmPassword}
                 className="form-control"
                 placeholder="Confirm Password"
@@ -141,19 +142,14 @@ const Register = () => {
             <div className="form-group">
               <div className="file-image">
                 <div className="image">
-                  {loadImage ? (
-                    <img src={loadImage} alt="profile-avatar" />
-                  ) : (
-                    ""
-                  )}{" "}
+                  {loadImage ? <img src={loadImage} alt="" /> : ""}
                 </div>
-
                 <div className="file">
                   <label htmlFor="image">Select Image</label>
                   <input
                     type="file"
-                    name="image"
                     onChange={fileHendle}
+                    name="image"
                     className="form-control"
                     id="image"
                   />
@@ -167,7 +163,7 @@ const Register = () => {
 
             <div className="form-group">
               <span>
-                <Link to="/chat/login"> Login Your Account </Link>
+                <Link to="/messenger/login"> Login Your Account </Link>
               </span>
             </div>
           </form>

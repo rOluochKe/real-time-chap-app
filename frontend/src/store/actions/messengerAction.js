@@ -3,12 +3,13 @@ import {
   FRIEND_GET_SUCCESS,
   MESSAGE_GET_SUCCESS,
   MESSAGE_SEND_SUCCESS,
+  THEME_GET_SUCCESS,
+  THEME_SET_SUCCESS,
 } from "../types/messengerType";
-import { baseUrl } from '../../baseUrl';
 
 export const getFriends = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${baseUrl}get-friends`);
+    const response = await axios.get("/api/messenger/get-friends");
     dispatch({
       type: FRIEND_GET_SUCCESS,
       payload: {
@@ -22,7 +23,7 @@ export const getFriends = () => async (dispatch) => {
 
 export const messageSend = (data) => async (dispatch) => {
   try {
-    const response = await axios.post(`${baseUrl}send-message`, data);
+    const response = await axios.post("/api/messenger/send-message", data);
     dispatch({
       type: MESSAGE_SEND_SUCCESS,
       payload: {
@@ -37,7 +38,7 @@ export const messageSend = (data) => async (dispatch) => {
 export const getMessage = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${baseUrl}get-message/${id}`);
+      const response = await axios.get(`/api/messenger/get-message/${id}`);
       dispatch({
         type: MESSAGE_GET_SUCCESS,
         payload: {
@@ -53,7 +54,7 @@ export const getMessage = (id) => {
 export const ImageMessageSend = (data) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `${baseUrl}image-message-send`,
+      "/api/messenger/image-message-send",
       data
     );
     dispatch({
@@ -69,7 +70,7 @@ export const ImageMessageSend = (data) => async (dispatch) => {
 
 export const seenMessage = (msg) => async (dispatch) => {
   try {
-    const response = await axios.post(`${baseUrl}seen-message`, msg);
+    const response = await axios.post("/api/messenger/seen-message", msg);
     console.log(response.data);
   } catch (error) {
     console.log(error.response.message);
@@ -78,7 +79,7 @@ export const seenMessage = (msg) => async (dispatch) => {
 
 export const updateMessage = (msg) => async (dispatch) => {
   try {
-    const response = await axios.post(`${baseUrl}delivared-message`, msg);
+    const response = await axios.post("/api/messenger/delivared-message", msg);
     console.log(response.data);
   } catch (error) {
     console.log(error.response.message);
@@ -88,7 +89,7 @@ export const updateMessage = (msg) => async (dispatch) => {
 export const getTheme = () => async (dispatch) => {
   const theme = localStorage.getItem("theme");
   dispatch({
-    type: "THEME_GET_SUCCESS",
+    type: THEME_GET_SUCCESS,
     payload: {
       theme: theme ? theme : "white",
     },
@@ -98,7 +99,7 @@ export const getTheme = () => async (dispatch) => {
 export const themeSet = (theme) => async (dispatch) => {
   localStorage.setItem("theme", theme);
   dispatch({
-    type: "THEME_SET_SUCCESS",
+    type: THEME_SET_SUCCESS,
     payload: {
       theme: theme,
     },

@@ -1,15 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", true);
 const databaseConnect = () => {
-  mongoose.connect(process.env.DATABASE_URL,{
-    useNewUrlParser : true,
-    useUnifiedTopology : true
-  }).then(()=>{
-    console.log('Mongodb Database Connected')
-  }).catch(error=>{
-    console.log(error)
-  })
-}
+  mongoose
+    .connect(process.env.DATABASE_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Mongodb Database Connected");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 module.exports = databaseConnect;

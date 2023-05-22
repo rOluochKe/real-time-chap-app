@@ -17,7 +17,7 @@ const Message = ({ message, currentfriend, scrollRef, typingMessage }) => {
                     <p className="message-text">
                       {" "}
                       {m.message.text === "" ? (
-                        <img src={`./image/${m.message.image}`} alt='' />
+                        <img src={`./image/${m.message.image}`} alt="" />
                       ) : (
                         m.message.text
                       )}{" "}

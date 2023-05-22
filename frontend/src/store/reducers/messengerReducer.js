@@ -9,7 +9,11 @@ import {
   DELIVARED_MESSAGE,
   UPDATE,
   MESSAGE_GET_SUCCESS_CLEAR,
+  SEEN_ALL,
+  THEME_GET_SUCCESS,
+  THEME_SET_SUCCESS
 } from "../types/messengerType";
+import { LOGOUT_SUCCESS, NEW_USER_ADD, NEW_USER_ADD_CLEAR } from "../types/authType"
 
 const messengerState = {
   friends: [],
@@ -23,7 +27,7 @@ const messengerState = {
 export const messengerReducer = (state = messengerState, action) => {
   const { type, payload } = action;
 
-  if (type === "THEME_GET_SUCCESS" || type === "THEME_SET_SUCCESS") {
+  if (type === THEME_GET_SUCCESS || type === THEME_SET_SUCCESS) {
     return {
       ...state,
       themeMood: payload.theme,
@@ -119,7 +123,7 @@ export const messengerReducer = (state = messengerState, action) => {
     };
   }
 
-  if (type === "SEEN_ALL") {
+  if (type === SEEN_ALL) {
     const index = state.friends.findIndex(
       (f) => f.fndInfo._id === payload.reseverId
     );
@@ -129,7 +133,7 @@ export const messengerReducer = (state = messengerState, action) => {
     };
   }
 
-  if (type === "LOGOUT_SUCCESS") {
+  if (type === LOGOUT_SUCCESS) {
     return {
       ...state,
       friends: [],
@@ -139,14 +143,14 @@ export const messengerReducer = (state = messengerState, action) => {
     };
   }
 
-  if (type === "NEW_USER_ADD") {
+  if (type === NEW_USER_ADD) {
     return {
       ...state,
       new_user_add: payload.new_user_add,
     };
   }
 
-  if (type === "NEW_USER_ADD_CLEAR") {
+  if (type === NEW_USER_ADD_CLEAR) {
     return {
       ...state,
       new_user_add: "",

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../store/actions/authAction";
@@ -45,7 +46,6 @@ const Login = () => {
       error.map((err) => alert.error(err));
       dispatch({ type: ERROR_CLEAR });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [successMessage, error]);
 
   return (
@@ -89,7 +89,7 @@ const Login = () => {
 
             <div className="form-group">
               <span>
-                <Link to="/chat/register"> Don't have any Account </Link>
+                <Link to="/messenger/register"> Don't have any Account </Link>
               </span>
             </div>
           </form>
