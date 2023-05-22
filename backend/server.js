@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const authRouter = require('./routes/authRoute')
+const messengerRoute = require('./routes/messengerRoute');
 
 dotenv.config({
   path: "backend/config/config.env",
@@ -19,7 +20,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan("dev"));
 
-app.use('/api/chat',authRouter);
+app.use('/api/chat', authRouter);
+app.use('/api/chat', messengerRoute);
 
 const PORT = process.env.PORT || 5000;
 app.get("/", (req, res) => {
